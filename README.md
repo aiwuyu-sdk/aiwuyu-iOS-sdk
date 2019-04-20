@@ -69,6 +69,13 @@ sdk向渠道app请求分享
 AwyShareData：返回sdk要分享的信息（分享标题、内容、链接、图片链接）
 返回值：true表示支持通过渠道app分享内容，false表示不支持分享内容 
 
+其中AwyShareData：有获取图片Data格式方法
+Swift:
+```func downloadImage(imageBack:@escaping ((_ imageData:Data?)->Void))```
+OC:
+```- (void)downloadImage:(void (^ _Nullable)(NSData * _Nullable))imageBack```
+如果imageData为空，下载图片出错
+
 ## 四. 联合登录整体流程
 
 * 爱物语sdk向渠道app请求联合登录参数
