@@ -10,7 +10,7 @@
      通过pod集成：
      在 Podfile中添加source路径
     ``` 
-    source 'http://gitlab.famfin.com:8080/APP/aiwuyu_ios_sdk.git'
+    source 'http://gitlab.aiwuyu.cn:8080/APP/aiwuyu_ios_sdk.git'
     
     use_frameworks!
     pod 'aiwuyu_iOS_sdk'
