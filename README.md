@@ -36,7 +36,12 @@ OC:
 channelCode：渠道身份标识
 delegate：是您必须要实现的AwySDKDelegate代理方法
 
-###### 2. 使用sdk打开h5链接
+###### 2. SDK添加配置信息 AwySDKConfig
+通过AwySDK的类方法配置，类方法需要一个遵守AwySDKConfig的类。
+func setConfig(config:AwySDKConfig )
+
+
+###### 3. 使用sdk打开h5链接
 
 Swift:
 ```AwySDK.openUrl(urlStr: "")```
@@ -44,12 +49,33 @@ Swift:
 OC:
 ```[AwySDK openUrlWithUrlStr:@"url"]```
 
+#### 2. 配置类AwySDKConfig
+AwySDKConfig协议介绍：
 
-#### 2. SDK回掉渠道app接口 AwySDKDelegate
+```
+///渠道App是否需要打印log
+func logEnable() -> Bool
+///环境，true：prd， false：test
+func isEnvironmentDebug() -> Bool
+///是否支持调用分享
+func enableContentShare() -> Bool
+///是否支持联合登录
+func enableUnionAuth() -> Bool
+///联合登录是否支持调起登录页面
+func enableCallAuthInterface() -> Bool
+```
+
+#### 3. SDK回掉渠道app接口 AwySDKDelegate
+
+###### 1. 签名回调 需要渠道APP 请求 嵌入“爱物语服务器-SDK”的服务器
 Swift:
-```func requestAuth(authInfo:((_ str:String)->Void)?)```
+```
+func requestUnionAuthInfo(authInfo:((_ str:String)->Void)?)
+```
 OC:
-```- (void)requestAuthWithAuthInfo:(void (^)(NSString * _Nonnull))authInfo```
+```
+- (void)requestUnionAuthInfoWithAuthInfo:(void (^)(NSString * _Nonnull))authInfo
+```
 
 sdk向渠道app请求联合登录参数
 
@@ -61,9 +87,13 @@ authInfo：在server中获取的登录参数,通过block回调传给sdk。
 
 ###### 2. 请求分享
 Swift:
-```func requestShare(shareData:AwyShareData)->Bool```
+```
+func requestShare(shareData:AwyShareData)
+```
 OC:
-```- (BOOL)requestShareWithShareData:(AwyShareData *)shareData```
+```
+- (Void)requestShareWithShareData:(AwyShareData *)shareData
+```
 
 sdk向渠道app请求分享 
 
@@ -72,10 +102,26 @@ AwyShareData：返回sdk要分享的信息（分享标题、内容、链接、�
 
 其中AwyShareData：有获取图片Data格式方法
 Swift:
-```func downloadImage(imageBack:@escaping ((_ imageData:Data?)->Void))```
+```
+func downloadImage(imageBack:@escaping ((_ imageData:Data?)->Void))
+```
 OC:
-```- (void)downloadImage:(void (^ _Nullable)(NSData * _Nullable))imageBack```
+```
+- (void)downloadImage:(void (^ _Nullable)(NSData * _Nullable))imageBack
+```
 如果imageData为空，下载图片出错
+
+###### 3.返回是否登录
+```
+func isAppAuth()->Bool
+```
+需要实时返回渠道APP，是否已经登录
+
+###### 4. 跳转渠道APP 登录页
+```
+func requestAuth(nav:UINavigationController)
+```
+返回 SDK 的UINavigationController 跳转登录页需要用到
 
 ## 四. 联合登录整体流程
 
