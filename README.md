@@ -39,10 +39,10 @@ delegate：是您必须要实现的AwySDKDelegate代理方法
 ###### 2. 使用sdk打开h5链接
 
 Swift:
-```AwySDK.pushWeb(nav: <#T##UINavigationController?#>, urlStr: <#T##String#>)```
+```AwySDK.openUrl(urlStr: "")```
 
 OC:
-```[AwySDK pushWebWithNav:<#(UINavigationController * _Nullable)#> urlStr:<#(NSString * _Nonnull)#>]```
+```[AwySDK openUrlWithUrlStr:@"url"]```
 
 
 #### 2. SDK回掉渠道app接口 AwySDKDelegate
