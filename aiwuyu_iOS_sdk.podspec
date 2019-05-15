@@ -7,11 +7,11 @@ Pod::Spec.new do |spec|
 
 爱物语  JS交互  SDK 
 DESC
-  spec.homepage     = "http://gitlab.aiwuyu.cn:8080/APP/aiwuyu_ios_sdk"
+  spec.homepage     = "https://github.com/aiwuyu-sdk/aiwuyu-iOS-sdk"
   spec.ios.deployment_target = "8.0"
   spec.license      = "MIT"
   spec.author             = { "yhl" => "yuhongli@aiwuyu.com"  }
-  spec.source       = { :git => "http://gitlab.aiwuyu.cn:8080/APP/aiwuyu_ios_sdk.git", :tag => "#{spec.version}" }
+  spec.source       = { :git => "https://github.com/aiwuyu-sdk/aiwuyu-iOS-sdk.git", :tag => "#{spec.version}" }
 # spec.resources    = "aiwuyu_iOS_sdk/**/*.{png,bundle}"
 spec.resource_bundle = { 'awySDK' => 'Resources/**/*.{png}' }
   spec.source_files  = "aiwuyu_iOS_sdk/**/*.{swift}"
