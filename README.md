@@ -24,14 +24,14 @@
     import aiwuyu_iOS_sdk
     ```
     
-   ```
+   ```objectivec
    ///OC:
    #import <aiwuyu_iOS_sdk-Swift.h>
    ```
    
    OC:例子
    AwySDKDelegate:
-   ```
+   ```objectivec
    ///实现AwySDKDelegate 协议方法例子
      @implementation AYSDKClass
      K_Shared(AYSDKClass)
@@ -78,7 +78,7 @@
    ```
    
    AwySDKConfig:
-   ```
+   ```objectivec
    ///实现AwySDKConfig 协议例子
    @implementation AYSDKConfig
 
@@ -105,7 +105,7 @@
      @end
    ```
    
-   ```
+   ```objectivec
         ///初始化配置 加进入web
         [AwySDK initializeWithChannelCode:@"aiwuyu-app" delegate:[AYSDKClass shared]];
          AYSDKConfig *config = [[AYSDKConfig alloc] init];
@@ -120,7 +120,9 @@
 Swift:
  ``` AwySDK.initialize(channelCode: <#T##String#>, delegate: <#T##AwySDKDelegate?#>)```
 OC:
- ```[AwySDK initializeWithChannelCode:<#(NSString * _Nonnull)#> delegate:<#(id<AwySDKDelegate> _Nullable)#>] ```
+ ```objectivec
+ [AwySDK initializeWithChannelCode:<#(NSString * _Nonnull)#> delegate:<#(id<AwySDKDelegate> _Nullable)#>]
+ ```
 推荐在AppDelegate中初始化SDK
 channelCode：渠道身份标识
 delegate：是您必须要实现的AwySDKDelegate代理方法
@@ -136,7 +138,9 @@ Swift:
 ```AwySDK.openUrl(urlStr: "")```
 
 OC:
-```[AwySDK openUrlWithUrlStr:@"url"]```
+```objectivec
+[AwySDK openUrlWithUrlStr:@"url"]
+```
 
 #### 2. 配置类AwySDKConfig
 AwySDKConfig协议介绍：
@@ -180,7 +184,7 @@ Swift:
 func requestShare(shareData:AwyShareData)
 ```
 OC:
-```
+```objectivec
 - (Void)requestShareWithShareData:(AwyShareData *)shareData
 ```
 
@@ -195,7 +199,7 @@ Swift:
 func downloadImage(imageBack:@escaping ((_ imageData:Data?)->Void))
 ```
 OC:
-```
+```objectivec
 - (void)downloadImage:(void (^ _Nullable)(NSData * _Nullable))imageBack
 ```
 如果imageData为空，下载图片出错
