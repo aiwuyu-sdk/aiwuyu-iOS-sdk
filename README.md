@@ -33,48 +33,48 @@
    AwySDKDelegate:
    ```
    ///实现AwySDKDelegate 协议方法例子
-@implementation AYSDKClass
-K_Shared(AYSDKClass)
+     @implementation AYSDKClass
+     K_Shared(AYSDKClass)
 
-- (void)requestShareWithShareData:(AwyShareData *)shareData{
-    
-    
-    NSString *title = shareData.title;
-    NSString *content = shareData.content;
-    NSString *url = shareData.shareUrl;
-    NSString *iconUrl = shareData.imageUrl;
-
-    
-    [AYShareController newsShareToShowWithUrlStr:url title:title content:content thumbUrl:iconUrl shareType:@"" miniProgram:@""];
-    
-    return ;
-}
-
-- (BOOL)isAppAuth{
-    return UserManager.isLogin;
-}
-- (void)requestAuthWithNav:(UINavigationController * _Nonnull)nav{
-    [nav pushViewController:[[JLoginOTPController alloc] init] animated:YES];
-}
-- (void)requestUnionAuthInfoWithAuthInfo:(void (^ _Nullable)(NSString * _Nonnull))authInfo{
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:@{@"channelCode":@"aiwuyu-app",@"loginDate":DeviceTool.currentDate}];
-    
-    if (UserManager.userId) {
-        dict[@"uid"] = UserManager.userId;
-    }
-    
-    
-    [NetworkManager requestWithPath:@"sdkMockApi" name:@"unionLogin" params:dict success:^(NSDictionary * _Nullable responseObject) {
-        NSLog(@"responseObject===%@",responseObject);
-        
-        authInfo(responseObject[@"channelReq"]);
-    } failure:^(NSDictionary * _Nullable responseObject, NSError * _Nonnull error) {
-        authInfo(@"");
-    }];
-}
+     - (void)requestShareWithShareData:(AwyShareData *)shareData{
 
 
-@end
+         NSString *title = shareData.title;
+         NSString *content = shareData.content;
+         NSString *url = shareData.shareUrl;
+         NSString *iconUrl = shareData.imageUrl;
+
+
+         [AYShareController newsShareToShowWithUrlStr:url title:title content:content thumbUrl:iconUrl shareType:@"" miniProgram:@""];
+
+         return ;
+     }
+
+     - (BOOL)isAppAuth{
+         return UserManager.isLogin;
+     }
+     - (void)requestAuthWithNav:(UINavigationController * _Nonnull)nav{
+         [nav pushViewController:[[JLoginOTPController alloc] init] animated:YES];
+     }
+     - (void)requestUnionAuthInfoWithAuthInfo:(void (^ _Nullable)(NSString * _Nonnull))authInfo{
+         NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:@{@"channelCode":@"aiwuyu-app",@"loginDate":DeviceTool.currentDate}];
+
+         if (UserManager.userId) {
+             dict[@"uid"] = UserManager.userId;
+         }
+
+
+         [NetworkManager requestWithPath:@"sdkMockApi" name:@"unionLogin" params:dict success:^(NSDictionary * _Nullable responseObject) {
+             NSLog(@"responseObject===%@",responseObject);
+
+             authInfo(responseObject[@"channelReq"]);
+         } failure:^(NSDictionary * _Nullable responseObject, NSError * _Nonnull error) {
+             authInfo(@"");
+         }];
+     }
+
+
+     @end
    ```
    
    AwySDKConfig:
@@ -82,35 +82,35 @@ K_Shared(AYSDKClass)
    ///实现AwySDKConfig 协议例子
    @implementation AYSDKConfig
 
-- (BOOL)logEnable{
-    return YES;
-}
+     - (BOOL)logEnable{
+         return YES;
+     }
 
-- (BOOL)isEnvironmentDebug{
-    return YES;
-}
+     - (BOOL)isEnvironmentDebug{
+         return YES;
+     }
 
-- (BOOL)enableContentShare{
-    return YES;
-}
+     - (BOOL)enableContentShare{
+         return YES;
+     }
 
-- (BOOL)enableUnionAuth{
-    return YES;
-}
+     - (BOOL)enableUnionAuth{
+         return YES;
+     }
 
-- (BOOL)enableCallAuthInterface{
-    return YES;
-}
+     - (BOOL)enableCallAuthInterface{
+         return YES;
+     }
 
-@end
+     @end
    ```
    
    ```
-   ///初始化配置 加进入web
-   [AwySDK initializeWithChannelCode:@"aiwuyu-app" delegate:[AYSDKClass shared]];
-    AYSDKConfig *config = [[AYSDKConfig alloc] init];
-    [AwySDK setConfigWithConfig:config];
-    [AwySDK openUrlWithUrlStr:@"https://test-miniprogram-h5.aiwuyu.com/awy/#/index"];
+        ///初始化配置 加进入web
+        [AwySDK initializeWithChannelCode:@"aiwuyu-app" delegate:[AYSDKClass shared]];
+         AYSDKConfig *config = [[AYSDKConfig alloc] init];
+         [AwySDK setConfigWithConfig:config];
+         [AwySDK openUrlWithUrlStr:@"https://test-miniprogram-h5.aiwuyu.com/awy/#/index"];
    ```
    
 ## 三.  API
