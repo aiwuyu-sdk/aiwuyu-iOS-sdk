@@ -87,9 +87,11 @@ class AwyWebViewController: UIViewController {
         if isToLogin {
             isToLogin = false
 
-            AwyUnionAuth.shared.getUserInfo {[weak self] in
-                
-                self?.authInfo?()
+            if AwySDK.shared.delegate?.isAppAuth?() == true{
+                AwyUnionAuth.shared.getUserInfo {[weak self] in
+                    
+                    self?.authInfo?()
+                }
             }
         }
         

@@ -89,7 +89,25 @@ class AwyJSBaseConfig: NSObject {
         self.webVC?.invokeJS(jsString)
     }
     
+    func signOut()  {
+        let action = UIAlertAction(title: "确定", style: .default) { (_) in
+            self.webVC?.dismiss(animated: true, completion: nil)
+            
+        }
+        let alert = UIAlertController(title: "提示", message: "您的登录已失效，请退出后重试", preferredStyle: .alert)
+        alert.addAction(action)
+        webVC?.present(alert, animated: true, completion: nil)
+        
+        
+    }
+    
     @objc func goLogin(_ paramsDict:[String:Any]){
+        if let force = paramsDict["isForce"] as? Int,force == 1 {
+            AwyUnionAuth.shared.userId = ""
+            AwyUnionAuth.shared.token = ""
+            signOut()
+            return
+        }
         let userId = AwyUnionAuth.shared.userId
         let token = AwyUnionAuth.shared.token
         if userId != "",
