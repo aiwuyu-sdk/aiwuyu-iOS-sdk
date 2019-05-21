@@ -13,7 +13,7 @@ let Awy_APP_Handler = "AWY_APP_Handler"
 
 var Awy_SDK_URL:String{
     if AwySDK.shared.config?.isEnvironmentDebug?() == true{
-        return "http://test-gateway.aiwuyu.cn:8080/sdkapi/invoke"
+        return "https://test-gateway.aiwuyu.com/sdkapi/invoke"
     }else{
         return "https://prd-gateway.aiwuyu.com/sdkapi/invoke"
     }
