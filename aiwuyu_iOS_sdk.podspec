@@ -4,8 +4,7 @@ Pod::Spec.new do |spec|
   spec.version      = "1.0.6"
   spec.summary      = "爱物语 JS交互 SDK aiwuyu_iOS_sdk."
   spec.description  = <<-DESC
-
-爱物语  JS交互  SDK 
+爱物语  JS交互   SDK 
 DESC
   spec.homepage     = "https://github.com/aiwuyu-sdk/aiwuyu-iOS-sdk"
   spec.ios.deployment_target = "8.0"
