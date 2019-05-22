@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |spec|
   spec.name         = "aiwuyu_iOS_sdk"
-  spec.version      = "1.0.6"
+  spec.version      = "1.0.7"
   spec.summary      = "爱物语 JS交互 SDK aiwuyu_iOS_sdk."
   spec.description  = <<-DESC
 爱物语  JS交互   SDK 
