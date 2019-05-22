@@ -22,8 +22,7 @@ class AwyWebViewController: UIViewController {
         pref.javaScriptCanOpenWindowsAutomatically = true
         config.preferences = pref
         config.userContentController = WKUserContentController()
-        let web = WKWebView(frame: CGRect(x: 0, y: Awy_NavTopHeight, width: Awy_Screen_Width, height: Awy_Screen_Height-Awy_TabBarHeight-Awy_NavTopHeight), configuration: config)
-        
+        let web = WKWebView(frame: CGRect(x: 0, y: 0, width: Awy_Screen_Width, height: Awy_Screen_Height-Awy_TabBarHeight), configuration: config)
         web.uiDelegate = self
         web.navigationDelegate = self
         return web
@@ -55,22 +54,13 @@ class AwyWebViewController: UIViewController {
     }
     override open func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         setLeftNav()
         view.backgroundColor = UIColor.white
         view.addSubview(webView)
         
         view.addSubview(progressView)
         
-        let leftConstraint = NSLayoutConstraint(item: progressView, attribute: .left, relatedBy: .equal, toItem: view, attribute: .left, multiplier: 1, constant: 0)
-        let rightConstraint = NSLayoutConstraint(item: progressView, attribute: .right, relatedBy: .equal, toItem: view, attribute: .right, multiplier: 1, constant: 0)
-        let topConstraint = NSLayoutConstraint(item: progressView, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: Awy_NavTopHeight)
-        view.addConstraints([leftConstraint,rightConstraint,topConstraint])
-        
         addObserver()
-        
-        
         if let url = URL(string: urlString){
             var request = URLRequest(url: url)
             request.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
@@ -86,7 +76,7 @@ class AwyWebViewController: UIViewController {
         
         if isToLogin {
             isToLogin = false
-
+            
             if AwySDK.shared.delegate?.isAppAuth?() == true{
                 AwyUnionAuth.shared.getUserInfo {[weak self] in
                     
@@ -316,17 +306,17 @@ extension AwyWebViewController:WKNavigationDelegate{
 
 
 extension AwyWebViewController:WKUIDelegate{
-//    func webView(_ webView: WKWebView, runJavaScriptTextInputPanelWithPrompt prompt: String, defaultText: String?, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (String?) -> Void){
-////        print(111111)
-////        completionHandler(nil)
-//    }
-//
-//    func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void){
-////        print(2222222)
-////        completionHandler()
-//    }
-//    func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void){
-////        print(3333333)
-////        completionHandler(true)
-//    }
+    //    func webView(_ webView: WKWebView, runJavaScriptTextInputPanelWithPrompt prompt: String, defaultText: String?, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (String?) -> Void){
+    ////        print(111111)
+    ////        completionHandler(nil)
+    //    }
+    //
+    //    func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void){
+    ////        print(2222222)
+    ////        completionHandler()
+    //    }
+    //    func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void){
+    ////        print(3333333)
+    ////        completionHandler(true)
+    //    }
 }

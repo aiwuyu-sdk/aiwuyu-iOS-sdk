@@ -88,8 +88,8 @@ class AwyUnionAuth: NSObject {
             
             if let backData = data{
                 if let dict = try? JSONSerialization.jsonObject(with: backData, options: []) as? Dictionary<String, Any>{
-                    if let code = dict["code"] as? String , code == "000000"{
-                        let enStr = dict["channelResp"] as? String ?? ""
+                    if let code = dict?["code"] as? String , code == "000000"{
+                        let enStr = dict?["channelResp"] as? String ?? ""
                         let resultStr = AwyAES128.AES128Decrypt(enStr)
                         let resultDict = resultStr?.toDic
                         let token = resultDict?["token"] as? String ?? ""
@@ -110,5 +110,5 @@ class AwyUnionAuth: NSObject {
         }
         task.resume()
     }
-
+    
 }
