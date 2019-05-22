@@ -22,7 +22,7 @@ class AwyWebViewController: UIViewController {
         pref.javaScriptCanOpenWindowsAutomatically = true
         config.preferences = pref
         config.userContentController = WKUserContentController()
-        let web = WKWebView(frame: CGRect(x: 0, y: 0, width: Awy_Screen_Width, height: Awy_Screen_Height-Awy_TabBarHeight), configuration: config)
+        let web = WKWebView(frame: CGRect(x: 0, y: Awy_NavTopHeight, width: Awy_Screen_Width, height: Awy_Screen_Height-Awy_TabBarHeight), configuration: config)
         web.uiDelegate = self
         web.navigationDelegate = self
         return web
@@ -54,6 +54,14 @@ class AwyWebViewController: UIViewController {
     }
     override open func viewDidLoad() {
         super.viewDidLoad()
+        
+        let v = UIView()
+        view.addSubview(v)
+        if #available(iOS 11.0, *){
+            webView.scrollView.contentInsetAdjustmentBehavior = .never
+        }else{
+            self.automaticallyAdjustsScrollViewInsets = false
+        }
         setLeftNav()
         view.backgroundColor = UIColor.white
         view.addSubview(webView)
