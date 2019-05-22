@@ -12,7 +12,9 @@ import WebKit
 
 class AwyWebViewController: UIViewController {
     
-    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
+    }
     static let userAgent:String = "Mobile/\(AwySDK_iPhoneType) AwySDK/\(AwySDK_Version)"
     
     lazy var webView:WKWebView = {
@@ -38,7 +40,7 @@ class AwyWebViewController: UIViewController {
         return progress
     }()
     var authInfo:(()->Void)?
-    
+    var preStyle = UIApplication.shared.statusBarStyle
     var isToLogin = false
     var rightItemFuncName = ""
     var currentPageUrl = ""
@@ -54,6 +56,7 @@ class AwyWebViewController: UIViewController {
     }
     override open func viewDidLoad() {
         super.viewDidLoad()
+        
         
         let v = UIView()
         view.addSubview(v)
@@ -95,9 +98,15 @@ class AwyWebViewController: UIViewController {
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        UIApplication.shared.setStatusBarStyle(.default, animated: false)
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         AwyUnionAuth.shared.stopTimer()
+        UIApplication.shared.setStatusBarStyle(preStyle, animated: false)
         
     }
     
