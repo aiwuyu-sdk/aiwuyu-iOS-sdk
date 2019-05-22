@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |spec|
   spec.name         = "aiwuyu_iOS_sdk"
-  spec.version      = "1.0.5"
+  spec.version      = "1.0.6"
   spec.summary      = "爱物语 JS交互 SDK aiwuyu_iOS_sdk."
   spec.description  = <<-DESC
 
@@ -19,7 +19,7 @@ spec.resource_bundle = { 'awySDK' => 'Resources/**/*.{png}' }
   spec.frameworks =
 "Foundation","UIKit"
 
-  spec.swift_version = '5.0'
+  spec.swift_version = '4.2'
   spec.requires_arc = true
   spec.static_framework = true
 end
