@@ -12,10 +12,12 @@ import WebKit
 
 class AwyWebViewController: UIViewController {
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .default
-    }
+    
     static let userAgent:String = "Mobile/\(AwySDK_iPhoneType) AwySDK/\(AwySDK_Version)"
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     
     lazy var webView:WKWebView = {
         let config = WKWebViewConfiguration()
@@ -24,7 +26,8 @@ class AwyWebViewController: UIViewController {
         pref.javaScriptCanOpenWindowsAutomatically = true
         config.preferences = pref
         config.userContentController = WKUserContentController()
-        let web = WKWebView(frame: CGRect(x: 0, y: Awy_NavTopHeight, width: Awy_Screen_Width, height: Awy_Screen_Height-Awy_TabBarHeight), configuration: config)
+        let web = WKWebView(frame: CGRect(x: 0, y: 0, width: Awy_Screen_Width, height: Awy_Screen_Height-Awy_NavTopHeight-Awy_TabBarHeight), configuration: config)
+        web.translatesAutoresizingMaskIntoConstraints = false
         web.uiDelegate = self
         web.navigationDelegate = self
         return web
@@ -35,7 +38,7 @@ class AwyWebViewController: UIViewController {
         progress.translatesAutoresizingMaskIntoConstraints = false
         progress.isHidden = false
         progress.tintColor = Awy_Color01
-        progress.frame = CGRect(x: 0, y: Awy_NavTopHeight, width: Awy_Screen_Width, height: 2)
+        progress.frame = CGRect(x: 0, y: 0, width: Awy_Screen_Width, height: 2)
         progress.setProgress(0.5, animated: true)
         return progress
     }()
@@ -57,19 +60,18 @@ class AwyWebViewController: UIViewController {
     override open func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        let v = UIView()
-        view.addSubview(v)
-        if #available(iOS 11.0, *){
-            webView.scrollView.contentInsetAdjustmentBehavior = .never
-        }else{
-            self.automaticallyAdjustsScrollViewInsets = false
+        if self.responds(to: #selector(setter: edgesForExtendedLayout)) {
+            self.edgesForExtendedLayout = UIRectEdge(rawValue: 0)
         }
+        self.navigationController?.navigationBar.setBackgroundImage(UIColor.white.createImage(), for: .default)
+        
         setLeftNav()
         view.backgroundColor = UIColor.white
         view.addSubview(webView)
         
         view.addSubview(progressView)
+        
+        
         
         addObserver()
         if let url = URL(string: urlString){
@@ -79,6 +81,13 @@ class AwyWebViewController: UIViewController {
         }
         
         AwySDK.log("进入SDK Web")
+        
+    }
+    
+    override func viewDidLayoutSubviews() {
+        
+        
+        
         
     }
     
