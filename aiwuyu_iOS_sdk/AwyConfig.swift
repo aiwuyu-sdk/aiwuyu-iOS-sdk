@@ -112,6 +112,18 @@ extension UIColor{
             alpha: alp
         )
     }
+    ///纯色image
+    func createImage(_ size:CGSize = CGSize(width: 1, height: 1))->UIImage?{
+        let filter = CIFilter(name: "CIConstantColorGenerator")
+        let context = CIContext()
+        filter?.setValue(CIColor(cgColor: self.cgColor), forKey: "inputColor")
+        if let image = filter?.outputImage,
+            let cgimage = context.createCGImage(image, from: CGRect(x: 0, y: 0, width: size.width, height: size.height)){
+            return UIImage(cgImage: cgimage)
+        }
+        return nil
+        
+    }
 }
 
 extension Dictionary{
